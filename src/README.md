@@ -15,11 +15,10 @@ The `src/` folder contains all project-related scripts and files.
 - The output is stored in `data/POC_data.txt`.
 
 ## **Future Plans**
-We plan to extend this project by scraping and analyzing a broader range of human-written text, including but not limited to:
+The `POC.py` is a simple implementation of web scraping to demonstrate our proof of concept. In the future, we plan to expand this project by using web scraping scripts and APIs to collect and analyze two categories of human-written text:
 - Movie and book reviews
-- Social media posts
 - News articles
-- Forum discussions
+
 
 
 ## **Getting Started**
