@@ -27,3 +27,5 @@ Ensure you have Python installed (preferably version 3.x) and install the requir
 ```sh
 pip install requests beautifulsoup4 pandas
 
+Change the path 'data_dir' to the path where you want the data to be stored.
+
