@@ -13,6 +13,7 @@ COLX_523_Group-Repository_David-Daoming-Jacob-Nicole/
 ├── documentation/       # Project-related documentation, meeting notes, and reports
 ├── README.md            # Repository overview and guidelines
 └── .gitignore           # Files and directories to be ignored by Git
+```
 
 #### ** Annotation Data**
 - **Human Annotations**: Stored in **Excel files** under:
