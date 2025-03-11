@@ -1,12 +1,19 @@
-import React from 'react';
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";  // ✅ Ensure correct path
+import SearchPage from "./pages/SearchPage";
+import AnnotationsPage from "./pages/AnnotationsPage";
 
-function App() {
+const App = () => {
   return (
     <div>
-      <h1>Movie Review Corpus</h1>
-      <p>Search and explore annotated movie reviews.</p>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/search" element={<SearchPage />} />
+        <Route path="/annotations" element={<AnnotationsPage />} />
+      </Routes>
     </div>
   );
-}
+};
 
 export default App;
