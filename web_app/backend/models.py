@@ -9,6 +9,6 @@ from pydantic import BaseModel
 from typing import Optional
 
 class Review(BaseModel):
-    review_id: str #is the review id necessary? 
+    review_id: str
     text: str
     annotation_label: Optional[str] = None

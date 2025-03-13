@@ -1,77 +1,87 @@
 """
 data_loader.py
 
-This module contains functions to load the movie review corpus from a JSON file.
-The expected format is a JSON array where each element is a review with:
-  - review_id: string
-  - text: string
-  - annotation_label: string (optional)
-If the file is not found, a small sample corpus is returned.
+Loads the movie review corpus from a JSON Lines (JSONL) file and builds a Whoosh index for efficient search.
+Each line in the JSONL file should be a JSON object with the following keys:
+  - id: Unique identifier for the review.
+  - text: A JSON-formatted string containing keys like "Reviewer", "Profile_URL", and "Review".
+  - label: The annotation label (could be numeric, so we convert it to string).
+This module extracts only the "Review" value from the text field and builds an index.
 """
 
-import json
 import os
-from typing import List
-from models import Review
+import json
+from whoosh import index
+from whoosh.fields import Schema, TEXT, ID
+from whoosh.analysis import StemmingAnalyzer
 
-def load_corpus() -> List[Review]:
+def create_index():
     """
-    Loads the corpus from data/corpus.json. If the file does not exist,
-    returns a fallback sample corpus.
-
-    Returns:
-      List[Review]: List of Review objects loaded from the file or sample data.
+    Creates a Whoosh index from the JSONL corpus if it doesn't already exist.
+    The index is stored in the 'indexdir' folder.
     """
+    # build the directory path where the index will be stored.
+    index_dir = os.path.join(os.path.dirname(__file__), "..", "..", "data", "annotated_dataset", "indexdir")
+    if not os.path.exists(index_dir):
+        os.makedirs(index_dir)
+        #print("Created index directory:", index_dir)
+    else:
+        print("Index directory already exists:", index_dir)
+        
+    # define the schema for the index
+    schema = Schema(
+        review_id=ID(stored=True, unique=True), 
+        text=TEXT(stored=True, analyzer=StemmingAnalyzer()),
+        annotation_label=TEXT(stored=True) 
+    )
+    
 
-    data_file = os.path.join(os.path.dirname(__file__), "..", "..", "data", "annotated_dataset", "annotated_database.jsonl")
-    
-    corpus = []
-    
-    try:
+    if not index.exists_in(index_dir):
+        idx = index.create_in(index_dir, schema)
+        writer = idx.writer()
+        # build the path to the JSONL corpus file.
+        data_file = os.path.join(os.path.dirname(__file__), "..", "..", "data", "annotated_dataset", "annotated_database.jsonl")
+        #print("Indexing file from:", data_file) #for debugging
+        
+        line_count = 0
         with open(data_file, "r", encoding="utf-8") as f:
-            # Read file line by line (since it's a JSONL file)
             for line in f:
                 line = line.strip()
                 if not line:
-                    continue  # Skip empty lines
-                # Parse the line into a Python dictionary
-                record = json.loads(line)
-                # Extract the review ID
-                review_id = record.get("id", "")
-                # Extract and process the text field: it is a JSON-formatted string.
-                raw_text = record.get("text", "")
+                    continue 
+                line_count += 1
+                if line_count % 100 == 0:
+                    print(f"Processed {line_count} lines")
                 try:
-                    # Convert the raw_text string into a dictionary
+                    record = json.loads(line)
+                except json.JSONDecodeError:
+                    print("Skipping malformed line")
+                    continue
+                    
+                # convert review_id and annotation_label to string to make unicode -- this might be messing up the annotation filtering, not sure. 
+                review_id = str(record.get("id", ""))
+                
+                # extract text field
+                raw_text = record.get("text", "")
+                
+                try:
+                    # parse the raw_text into dict.
                     text_obj = json.loads(raw_text)
-                    # Extract only the "Review" field from the text object.
+                    # extract only the "Review" key -- i added this bc it looks better in the front-end. but we can keep reviewer too, for example.
                     review_text = text_obj.get("Review", "")
                 except json.JSONDecodeError:
-                    # If raw_text is not valid JSON, fall back to using it as-is.
                     review_text = raw_text
-                # Extract the annotation label
-                annotation_label = record.get("label", "")
-                # Create a Review object using the extracted values.
-                corpus.append(Review(review_id=review_id, text=review_text, annotation_label=annotation_label))
-        return corpus
-        
-    except FileNotFoundError:
-        # Sample corpus data if corpus.json is missing
-        sample_data = [
-            {
-                "review_id": "001",
-                "text": "This film was breathtaking and full of stunning visuals.",
-                "annotation_label": "logos"
-            },
-            {
-                "review_id": "002",
-                "text": "I found the plot uninteresting and the characters shallow.",
-                "annotation_label": "pathos"
-            },
-            {
-                "review_id": "003",
-                "text": "An average movie with some moments of brilliance.",
-                "annotation_label": ""
-            }
-        ]
-        corpus = [Review(**item) for item in sample_data]
-        return corpus
+                # convert annotation_label to string.
+                annotation_label = str(record.get("label", ""))
+                writer.add_document(review_id=review_id, text=review_text, annotation_label=annotation_label)
+        writer.commit()
+        print("Index creation complete. Total lines processed:", line_count) #for debugging
+    else:
+        print("Index already exists. Skipping index creation.") #for debugging
+
+def get_index():
+    """
+    Opens and returns the Whoosh index.
+    """
+    index_dir = os.path.join(os.path.dirname(__file__), "..", "..", "data", "annotated_dataset", "indexdir")
+    return index.open_dir(index_dir)

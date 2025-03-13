@@ -10,13 +10,13 @@ Entry point for FastAPI back-end.
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from data_loader import load_corpus
+from data_loader import create_index, get_index
 from routes import router
 
 app = FastAPI(
     title="Movie Review Corpus API",
     description="API for searching and retrieving annotated movie reviews.",
-    version="1.0.0",
+    version="1.0.1",
 )
 
 # currently CORS allows requests from any origin (should adjust later?)
@@ -28,15 +28,16 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Load the corpus once at startup and store it in app state
+# create the whoosh index at startup and load to app.state
 @app.on_event("startup")
 def startup_event():
-    app.state.corpus = load_corpus() #should maybe include error handling here to ensure corpus is loading right?
+    create_index() #build index from jsonl corpus
+    app.state.index = get_index() #index store in app.state for endpoints
 
-# Include API routes (defined in routes.py)
+# include API routes (defined in routes.py)
 app.include_router(router)
 
-# Run app when executing this file
+# run app when executing this file
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
