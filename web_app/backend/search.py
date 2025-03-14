@@ -31,7 +31,9 @@ def search_reviews_whoosh(index, query: str, annotated_only: bool) -> List[Revie
 
         #to filter non-annotated
         if annotated_only:
-            results = [doc for doc in results if doc.get("annotation_label", "").strip() != ""] #this is not working, needs fixing
+            results = [
+              doc for doc in results if doc.get("annotation_label", "").strip() != "[]"
+            ] 
 
         #convert to Review object
         reviews = [

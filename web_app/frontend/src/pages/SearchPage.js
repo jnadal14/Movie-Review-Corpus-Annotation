@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 const SearchPage = () => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
+  const [annotated, setAnnotated] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -12,7 +13,7 @@ const SearchPage = () => {
     setLoading(true);
     setError("");
     try {
-      const response = await fetch(`http://127.0.0.1:8000/search?q=${encodeURIComponent(query)}&annotated=false`);
+      const response = await fetch(`http://127.0.0.1:8000/search?q=${encodeURIComponent(query)}&annotated=${annotated}`);
       if (!response.ok) {
         throw new Error("Error fetching results");
       }
@@ -43,6 +44,17 @@ const SearchPage = () => {
           style={styles.input}
         />
         <button onClick={handleSearch} style={styles.button}>Search</button>
+      </div>
+
+      <div style={styles.checkboxContainer}>
+        <input
+          type="checkbox"
+          id="annotated-only"
+          checked={annotated}
+          onChange={(e) => setAnnotated(e.target.checked)}
+          style={{marginRight: '8px'}}
+        />
+        <label htmlFor="annotated-only">Show only annotated documents</label>
       </div>
 
       {loading && <p>Loading...</p>}
@@ -110,6 +122,13 @@ const styles = {
     gap: "10px",
     marginBottom: "20px",
   },
+  checkboxContainer: { 
+    marginTop: '10px', 
+    display: 'flex', 
+    justifyContent: "center",
+    gap: "10px",
+    marginBottom: "20px",
+  },
   input: {
     padding: "10px",
     width: "300px",
@@ -157,7 +176,7 @@ const styles = {
   icon: {
     width: "20px",
     height: "20px",
-  },
+  }
 };
 
 export default SearchPage;
