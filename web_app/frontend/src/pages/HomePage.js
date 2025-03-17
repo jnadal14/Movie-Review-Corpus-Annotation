@@ -11,7 +11,7 @@ const HomePage = () => {
       {/* Navigation Buttons */}
       <div style={styles.buttonContainer}>
         <Link to="/search" style={styles.button}>
-          <img src="/search.png" alt="Search Icon" style={styles.icon} /> Search Reviews
+          <img src="/search.png" alt="Search Icon" style={styles.icon} /> Search Reviews 
         </Link>
         <Link to="/annotations" style={styles.button}>
           <img src="/annotation.png" alt="Annotations Icon" style={styles.icon} /> View Annotations
