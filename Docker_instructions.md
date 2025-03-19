@@ -17,7 +17,7 @@ Before you begin, please ensure you have the following installed on your compute
 
 ---
 
-## Building the Docker Image (Note: image takes some time to build!)
+## Building the Docker Image (Note: image takes some time to build. ~12 minutes)
 
 1. **Open a Terminal or Command Prompt.**
 
@@ -26,10 +26,11 @@ Before you begin, please ensure you have the following installed on your compute
    ```bash
    cd ~/projects/COLX_523_Group-Repository_David-Daoming-Jacob-Nicole
 
-3. Run the following command to build the image.
+3. Run the following command (from the root of the repo) to build the image.
     ```bash
-    docker build -t movie-reviews
-
+    docker build -t movie-reviews .
+    
+(Note: remember the "." at the end of the command above!)
 When the build completes, you should see a message confirming the image was built.
 
 ## Running the Docker container
