@@ -6,7 +6,7 @@ and can optionally filter out reviews without annotations.
 """
 
 from typing import List
-from models import Review
+from .models import Review
 from whoosh.qparser import MultifieldParser
 
 def search_reviews_whoosh(index, query: str, annotated_only: bool) -> List[Review]: 

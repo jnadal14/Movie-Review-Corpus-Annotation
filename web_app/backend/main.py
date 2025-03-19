@@ -12,7 +12,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from .data_loader import create_index, get_index
-from routes import router
+from .routes import router
 
 app = FastAPI(
     title="Movie Review Corpus API",
