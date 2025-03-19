@@ -11,7 +11,7 @@ Entry point for FastAPI back-end.
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from data_loader import create_index, get_index
+from .data_loader import create_index, get_index
 from routes import router
 
 app = FastAPI(
