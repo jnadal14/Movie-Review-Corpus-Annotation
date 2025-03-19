@@ -17,7 +17,7 @@ Before you begin, please ensure you have the following installed on your compute
 
 ---
 
-## Building the Docker Image
+## Building the Docker Image (Note: image takes some time to build!)
 
 1. **Open a Terminal or Command Prompt.**
 
