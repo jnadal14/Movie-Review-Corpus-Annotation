@@ -17,7 +17,7 @@ Before you begin, please ensure you have the following installed on your compute
 
 ---
 
-## Building the Docker Image (Note: image takes some time to build. ~12 minutes)
+## Building the Docker Image (Note: image takes some time to build. ~12 minutes on first build)
 
 1. **Open a Terminal or Command Prompt.**
 
@@ -52,22 +52,29 @@ Check that navigation options (e.g., "Search Reviews", "View Annotations") are v
 
 2. Search Functionality:
 
-Use the search input to enter keywords (e.g., "nolan" or "hello").
+Use the search input to enter keywords (e.g., "nolan" or "hello"). You may un-check "Show only annotated documents" to view both un-annotated and annotated reviews (by default, you will see only annotated documents).
+
 Confirm that the search returns matching reviews.
+
+You may scroll to the bottom to find "Return to Homepage".
 
 3. Annotation Filtering:
 
-On the annotation page, select one of the annotation categories ("Pathos", "Logos", or "Ethos").
+On the "View Annotations" page, select one of the annotation categories ("Pathos", "Logos", or "Ethos").
 Verify that only reviews with the chosen annotation are displayed.
+
+You may scroll to the bottom to find "Return to Homepage".
 
 4. API Documentation:
 
 Visit http://localhost:8000/docs to access the interactive API documentation.
 Ensure that you can view all the available endpoints and try them out.
 
-5. Health Check:
+5. Health Check (optional. not included in frontend):
 
-Visit http://localhost:8000/health to see the number of documents indexed if you are interested.
+Visit http://localhost:8000/health to see the number of documents indexed if you are interested. You will see number of documents after "document_count".
+
+6. To stop running, simply press CTRL + C on the terminal.
 
 ## Troubleshooting tips
 
