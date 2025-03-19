@@ -11,6 +11,7 @@ RUN npm run build
 # set up backend with corpus data
 FROM python:3.11-slim
 WORKDIR /app
+ENV PYTHONPATH=/app
 
 #system dependencies 
 RUN apt-get update && apt-get install -y gcc && rm -rf /var/lib/apt/lists/*
