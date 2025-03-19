@@ -21,7 +21,7 @@ COPY web_app/backend/ ./
 COPY data/ ./data/
 # copy the built frontend (static files) into backend's static directory
 # backend code should be set up to serve static files from "backend/static"
-COPY --from=build-frontend /app/web_app/frontend/build/ ./web_app/backend/static/
+COPY --from=build-frontend /app/web_app/frontend/build/ ./static/
 
 # install python dependencies
 # (Make sure these are the dependencies needed by your backend)
