@@ -19,3 +19,6 @@ web_app/frontend/src/pages/.ipynb_checkpoints/
 # Ignore node_modules
 web_app/frontend/node_modules/
 web_app/backend/node_modules/
+**/node_modules
+**/indexdir
+*.pyc
