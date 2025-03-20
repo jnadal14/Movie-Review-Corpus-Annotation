@@ -2,6 +2,8 @@
 
 This document explains step-by-step how to build and run the Docker image for our corpus interface project. These instructions should be helpful even if you have no previous Docker experience.
 
+To view documentation on github: go to https://github.ubc.ca/MDS-CL-2024-25/COLX_523_Group-Repository_David-Daoming-Jacob-Nicole/tree/main
+
 ---
 ## Option 1: Download image from Drive (No image building required)
 
