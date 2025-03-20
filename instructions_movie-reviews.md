@@ -6,21 +6,30 @@ This document explains step-by-step how to build and run the Docker image for ou
 ## Option 1: Download image from Drive (No image building required)
 
 1. **Download the Tar file from Google Drive**
-    Download `movie-reviews.tar` file from https://drive.google.com/drive/folders/1GVG8fABO9DKdAuBz1cJZpFvXxImRNHuV?usp=sharing
+
+Download `movie-reviews.tar` file from https://drive.google.com/drive/folders/1GVG8fABO9DKdAuBz1cJZpFvXxImRNHuV?usp=sharing
+
 2. **Load image into Docker**
-    Open a Terminal or Command Prompt and run:
+Open a Terminal or Command Prompt and run:
    ```bash
    docker load -i movie-reviews.tar
 
-   Make sure your path to movie-reviews.tar works.
+Make sure your path to movie-reviews.tar works.
+
 3. **Run the container**
-   Once the image is loaded, run with:
+Once the image is loaded, run with:
    ```bash
    docker run -p 8000:8000 movie-reviews
+
+4. **Access the interface**
+Open your browser and go to http://localhost:8000/
 
 To see how to explore the interface, scroll down in this file to "What you should try".
 
 If you run into any issues, scroll down to "Troubleshooting Tips".
+
+5. To close interface, press "CTRL" + "C" on your running terminal.
+
 
 ## Option 2: Build your own image locally.
 
