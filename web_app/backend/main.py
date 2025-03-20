@@ -10,8 +10,9 @@ Entry point for FastAPI back-end.
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from data_loader import create_index, get_index
-from routes import router
+from fastapi.staticfiles import StaticFiles
+from .data_loader import create_index, get_index
+from .routes import router
 
 app = FastAPI(
     title="Movie Review Corpus API",
@@ -41,3 +42,7 @@ app.include_router(router)
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
+
+# serve the frontend build as static files from root URL
+app.mount("/", StaticFiles(directory="/app/web_app/backend/static", html=True), name="static")
+

@@ -8,8 +8,8 @@ This file defines the API endpoints that query whoosh index. It contains two end
 
 from fastapi import APIRouter, Request, HTTPException
 from typing import List
-from search import search_reviews_whoosh
-from models import Review
+from .search import search_reviews_whoosh
+from .models import Review
 
 router = APIRouter()
 

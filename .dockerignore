@@ -1,6 +1,6 @@
-.DS_Store
-data/.DS_Store
-data/annotated_dataset/indexdir/
+# Ignore Git-related files
+.git
+.gitignore
 
 # Ignore Jupyter notebook checkpoints
 .ipynb_checkpoints/
@@ -8,10 +8,17 @@ data/annotated_dataset/indexdir/
 # Ignore Python cache files
 __pycache__/
 
-# Ignore specific files and folders
+# Ignore unnecessary data directories
 data/annotated_dataset/.ipynb_checkpoints/
 src/analysis/modified_corpus_batches/json/.ipynb_checkpoints/
 web_app/.ipynb_checkpoints/
 web_app/backend/.ipynb_checkpoints/
 web_app/frontend/.ipynb_checkpoints/
 web_app/frontend/src/pages/.ipynb_checkpoints/
+
+# Ignore node_modules
+web_app/frontend/node_modules/
+web_app/backend/node_modules/
+**/node_modules
+**/indexdir
+*.pyc
