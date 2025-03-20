@@ -3,8 +3,28 @@
 This document explains step-by-step how to build and run the Docker image for our corpus interface project. These instructions should be helpful even if you have no previous Docker experience.
 
 ---
+## Option 1: Download image from Drive (No image building required)
 
-## Prerequisites
+1. **Download the Tar file from Google Drive**
+    Download `movie-reviews.tar` file from https://drive.google.com/drive/folders/1GVG8fABO9DKdAuBz1cJZpFvXxImRNHuV?usp=sharing
+2. **Load image into Docker**
+    Open a Terminal or Command Prompt and run:
+   ```bash
+   docker load -i movie-reviews.tar
+
+   Make sure your path to movie-reviews.tar works.
+3. **Run the container**
+   Once the image is loaded, run with:
+   ```bash
+   docker run -p 8000:8000 movie-reviews
+
+To see how to explore the interface, scroll down in this file to "What you should try".
+
+If you run into any issues, scroll down to "Troubleshooting Tips".
+
+## Option 2: Build your own image locally.
+
+### Prerequisites
 
 Before you begin, please ensure you have the following installed on your computer:
 
@@ -17,7 +37,7 @@ Before you begin, please ensure you have the following installed on your compute
 
 ---
 
-## Building the Docker Image (Note: image takes some time to build. ~12 minutes on first build)
+### Building the Docker Image (Note: image takes some time to build. ~12 minutes on first build)
 
 1. **Open a Terminal or Command Prompt.**
 
@@ -33,7 +53,7 @@ Before you begin, please ensure you have the following installed on your compute
 (Note: remember the "." at the end of the command above!)
 When the build completes, you should see a message confirming the image was built.
 
-## Running the Docker container
+### Running the Docker container
 
 1. After the image is built, run the following command to start the container and map the container's port 8000 to your local machine:
     ```bash
@@ -41,6 +61,7 @@ When the build completes, you should see a message confirming the image was buil
 
 2. Access the interface: open your browser and go to
 http://localhost:8000/
+
 
 ## What you should try:
 When testing the interface, please follow these steps:
@@ -78,14 +99,14 @@ Visit http://localhost:8000/health to see the number of documents indexed if you
 
 ## Troubleshooting tips
 
-#### Interface Does Not Load:
+### Interface Does Not Load:
 
 - Check the terminal for any error messages.
 - Ensure Docker is running and that no other application is using port 8000.
 - If necessary, run the container with a different local port (e.g., use -p 8080:8000 and then visit http://localhost:8080/).
 
 
-#### Port Conflicts:
+### Port Conflicts:
 
 If port 8000 is already in use, you can change the mapping by using a different local port:
     ```bash
