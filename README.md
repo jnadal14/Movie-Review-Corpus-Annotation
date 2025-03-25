@@ -1,13 +1,13 @@
 # COLX 523 - Advanced Corpus Linguistics
 
-## Group Repository: David, Daoming, Jacob, Nicole
+## Group Repository: David Kang, Daoming Liu, Jacob Nadal, Nicole Lopez
 
 ### **Project Overview**
-This repository is dedicated to our group project for COLX 523 - Advanced Corpus Linguistics. The project involves building a corpus with annotation and a web interface, leveraging internet text sources to collect a sizable corpus (~1 million words).
+This is a fork of a repoistory dedicated to a group project for COLX 523 - Advanced Corpus Linguistics. The project involves building a corpus with annotation and a web interface, leveraging internet text sources to collect a sizable corpus (~1 million words).
 
 ### **Repository Structure**
 ```plaintext
-COLX_523_Group-Repository_David-Daoming-Jacob-Nicole/
+Movie-Review-Corpus-Annotation/
 ├── data/                # Raw and processed data files
 ├── documentation/       # Project-related documentation, meeting notes, and reports
 ├── src/                 # Source code for data collection, processing, and annotation
